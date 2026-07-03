@@ -2,6 +2,10 @@
 
 // import Image from "next/image";
 // import countrFlag from "@/public/"
+
+export const metadata = {
+  title: "Update Profile",
+};
 export default function Page() {
   // CHANGE
   // const countryFlag = "pt.jpg";
@@ -18,12 +22,12 @@ export default function Page() {
         faster and smoother. See you soon!
       </p>
 
-      <form className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col">
+      <form className="bg-primary-900 py-4 px-8 sm:py-8 sm:px-12 text-lg flex gap-6 flex-col">
         <div className="space-y-2">
           <label>Full name</label>
           <input
             disabled
-            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
+            className="px-3 py-1 sm:px-5 sm:py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
           />
         </div>
 
@@ -31,7 +35,7 @@ export default function Page() {
           <label>Email address</label>
           <input
             disabled
-            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
+            className="px-3 py-1 sm:px-5 sm:py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
           />
         </div>
 
@@ -57,12 +61,12 @@ export default function Page() {
           <label htmlFor="nationalID">National ID number</label>
           <input
             name="nationalID"
-            className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
+            className="px-3 py-1 sm:px-5 sm:py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
           />
         </div>
 
         <div className="flex justify-end items-center gap-6">
-          <button className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
+          <button className="bg-accent-500 px-4 py-2 sm:px-8 sm:py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
             Update profile
           </button>
         </div>
