@@ -2,10 +2,10 @@ import Link from "next/link";
 
 export default function Navigation() {
   const linkStyle =
-    "hover:text-accent-400 transition-colors text-sm sm:text-lg";
+    "hover:text-accent-400 transition-colors text-base sm:text-lg";
   return (
     <nav className="z-10 text-xl">
-      <ul className="flex gap-16 items-center">
+      <ul className="flex gap-4 sm:gap-16 items-center">
         <li>
           <Link href="/cabins" className={linkStyle}>
             Cabins
