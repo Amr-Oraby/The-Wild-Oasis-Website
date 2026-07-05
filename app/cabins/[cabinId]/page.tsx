@@ -1,4 +1,5 @@
-import { getCabin } from "@/app/_lib/data-service";
+import { getCabin, getCabins } from "@/app/_lib/data-service";
+import { cabinType } from "@/app/types/cabinType";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 
@@ -20,11 +21,19 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
+// Then Next.js creates these pages during the build:
+export async function generateStaticParams() {
+  const cabins = await getCabins();
+  const ids = cabins.map((cabin: cabinType) => ({
+    cabinId: String(cabin.id),
+  }));
+  return ids;
+}
+
 export default async function Page({ params }: PageProps) {
   const { cabinId } = await params;
   const cabin = await getCabin(Number(cabinId));
-  const { id, name, maxCapacity, regularPrice, discount, image, description } =
-    cabin;
+  const { name, maxCapacity, image, description } = cabin;
 
   return (
     <div className="max-w-6xl mx-auto mt-8">

@@ -1,5 +1,3 @@
-// import ReservationCard from "./ReservationCard";
-
 export const metadata = {
   title: "Reservations",
 };
