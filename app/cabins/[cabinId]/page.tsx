@@ -1,3 +1,4 @@
+import TextExpander from "@/app/_components/TextExpander";
 import { getCabin, getCabins } from "@/app/_lib/data-service";
 import { cabinType } from "@/app/types/cabinType";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
@@ -22,6 +23,7 @@ export async function generateMetadata({ params }: PageProps) {
 }
 
 // Then Next.js creates these pages during the build:
+// from dynamic to static
 export async function generateStaticParams() {
   const cabins = await getCabins();
   const ids = cabins.map((cabin: cabinType) => ({
@@ -52,7 +54,9 @@ export default async function Page({ params }: PageProps) {
             Cabin {name}
           </h3>
 
-          <p className="text-base text-primary-300 mb-4">{description}</p>
+          <p className="text-base text-primary-300 mb-4">
+            <TextExpander>{description}</TextExpander>
+          </p>
 
           <ul className="flex flex-col gap-4 mb-7 items-center  lg:items-start">
             <li className="flex gap-3 items-center">

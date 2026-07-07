@@ -1,7 +1,8 @@
 import { eachDayOfInterval } from "date-fns";
 import { supabase } from "./supbase";
 import { notFound } from "next/navigation";
-
+import { guestType } from "../types/guestType";
+import { bookingType } from "../types/bookingType";
 /////////////
 // GET
 
@@ -152,7 +153,7 @@ export async function getCountries() {
 /////////////
 // CREATE
 
-export async function createGuest(newGuest) {
+export async function createGuest(newGuest: guestType) {
   const { data, error } = await supabase.from("guests").insert([newGuest]);
 
   if (error) {
@@ -163,7 +164,7 @@ export async function createGuest(newGuest) {
   return data;
 }
 
-export async function createBooking(newBooking) {
+export async function createBooking(newBooking: bookingType) {
   const { data, error } = await supabase
     .from("bookings")
     .insert([newBooking])
@@ -183,7 +184,8 @@ export async function createBooking(newBooking) {
 // UPDATE
 
 // The updatedFields is an object which should ONLY contain the updated data
-export async function updateGuest(id: number, updatedFields) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function updateGuest(id: number, updatedFields: any) {
   const { data, error } = await supabase
     .from("guests")
     .update(updatedFields)
@@ -198,7 +200,8 @@ export async function updateGuest(id: number, updatedFields) {
   return data;
 }
 
-export async function updateBooking(id: number, updatedFields) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function updateBooking(id: number, updatedFields: any) {
   const { data, error } = await supabase
     .from("bookings")
     .update(updatedFields)

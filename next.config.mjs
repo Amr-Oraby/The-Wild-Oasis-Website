@@ -8,7 +8,7 @@ const nextConfig = {
             },
         ],
     },
-    output: "export"
+    // output: "export" // no server
 };
 
 export default nextConfig;

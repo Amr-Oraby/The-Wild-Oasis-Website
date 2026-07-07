@@ -1,38 +1,40 @@
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
-import { format, formatDistance, isPast, isToday, parseISO } from "date-fns";
+import { format, formatDistance, parseISO } from "date-fns";
+// isToday,IsPast
 import DeleteReservation from "./DeleteReservation";
+import { bookingType } from "../types/bookingType";
 
-export const formatDistanceFromNow = (dateStrL: Date) =>
+export const formatDistanceFromNow = (dateStrL: string) =>
   formatDistance(parseISO(dateStrL), new Date(), {
     addSuffix: true,
   }).replace("about ", "");
 
-function ReservationCard({ booking }) {
+function ReservationCard({ booking }: { booking: bookingType }) {
   const {
     id,
-    guestId,
-    startDate,
-    endDate,
-    numNights,
+    // guestId,
+    // startDate,
+    // endDate,
+    // numNights,
     totalPrice,
-    numGuests,
-    status,
+    // numGuests,
+    // status,
     created_at,
-    cabins: { name, image },
+    // cabins: { name, image },
   } = booking;
 
   return (
     <div className="flex border border-primary-800">
       <div className="relative h-32 aspect-square">
-        <img
+        {/* <img
           src={image}
           alt={`Cabin ${name}`}
           className="object-cover border-r border-primary-800"
-        />
+        /> */}
       </div>
 
       <div className="flex-grow px-6 py-3 flex flex-col">
-        <div className="flex items-center justify-between">
+        {/* <div className="flex items-center justify-between">
           <h3 className="text-xl font-semibold">
             {numNights} nights in Cabin {name}
           </h3>
@@ -45,22 +47,22 @@ function ReservationCard({ booking }) {
               upcoming
             </span>
           )}
-        </div>
+        </div> */}
 
-        <p className="text-lg text-primary-300">
+        {/* <p className="text-lg text-primary-300">
           {format(new Date(startDate), "EEE, MMM dd yyyy")} (
           {isToday(new Date(startDate))
             ? "Today"
             : formatDistanceFromNow(startDate)}
           ) &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
-        </p>
+        </p> */}
 
         <div className="flex gap-5 mt-auto items-baseline">
           <p className="text-xl font-semibold text-accent-400">${totalPrice}</p>
           <p className="text-primary-300">&bull;</p>
-          <p className="text-lg text-primary-300">
+          {/* <p className="text-lg text-primary-300">
             {numGuests} guest{numGuests > 1 && "s"}
-          </p>
+          </p> */}
           <p className="ml-auto text-sm text-primary-400">
             Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}
           </p>
