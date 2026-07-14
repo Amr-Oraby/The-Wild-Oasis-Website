@@ -1,4 +1,4 @@
-// import SelectCountry from "@/app/_components/SelectCountry";
+import SelectCountry from "@/app/_components/SelectCountry";
 
 // import Image from "next/image";
 // import countrFlag from "@/public/"
@@ -9,7 +9,7 @@ export const metadata = {
 export default function Page() {
   // CHANGE
   // const countryFlag = "pt.jpg";
-  // const nationality = "portugal";
+  const nationality = "Canada";
 
   return (
     <div>
@@ -51,12 +51,12 @@ export default function Page() {
             /> */}
           </div>
 
-          {/* <SelectCountry
+          <SelectCountry
             name="nationality"
             id="nationality"
             className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
             defaultCountry={nationality}
-          /> */}
+          />
         </div>
 
         <div className="space-y-2">

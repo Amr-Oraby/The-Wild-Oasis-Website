@@ -141,9 +141,15 @@ export async function getSettings() {
 export async function getCountries() {
   try {
     const res = await fetch(
-      "https://restcountries.com/v2/all?fields=name,flag",
+      "https://api.restcountries.com/countries/v5?limit=100", // 100 is the maximum free plan
+      {
+        headers: {
+          Authorization: "Bearer rc_live_6fe930685cad4a26946874b42cebee28",
+        },
+      },
     );
-    const countries = await res.json();
+    const data = await res.json();
+    const countries = data.data.objects;
     return countries;
   } catch {
     throw new Error("Could not fetch countries");
