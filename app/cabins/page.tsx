@@ -5,12 +5,22 @@ import Spinner from "../_components/Spinner";
 // revalidate = 0 => dynamic page
 // revalidate > 0 => static and refetches
 export const revalidate = 3600; // seconds => every hour
+// not usefult after using saerchParams as searchParams made the page dynamic
 
 export const metadata = {
   title: "Cabins",
 };
 
-export default async function Page() {
+type PageProps = {
+  searchParams: Promise<{
+    capacity: string;
+  }>;
+};
+
+export default async function Page({ searchParams }: PageProps) {
+  const { capacity } = await searchParams;
+  const filter = capacity ?? "all";
+
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
@@ -26,7 +36,7 @@ export default async function Page() {
       </p>
 
       <Suspense fallback={<Spinner />}>
-        <CabinList />
+        <CabinList filter={filter} />
       </Suspense>
     </div>
   );

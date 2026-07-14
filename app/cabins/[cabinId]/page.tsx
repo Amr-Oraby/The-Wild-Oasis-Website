@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: PageProps) {
 // from dynamic to static
 export async function generateStaticParams() {
   const cabins = await getCabins();
+  // return array of objects of ids
   const ids = cabins.map((cabin: cabinType) => ({
     cabinId: String(cabin.id),
   }));
