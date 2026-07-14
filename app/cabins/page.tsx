@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import Spinner from "../_components/Spinner";
+import Filter from "../_components/Filter";
 
 // revalidate = 0 => dynamic page
 // revalidate > 0 => static and refetches
@@ -34,8 +35,9 @@ export default async function Page({ searchParams }: PageProps) {
         home away from home. The perfect spot for a peaceful, calm vacation.
         Welcome to paradise.
       </p>
-
-      <Suspense fallback={<Spinner />}>
+      <Filter />
+      {/* whenever the key changes the spinner will show */}
+      <Suspense fallback={<Spinner />} key={filter}>
         <CabinList filter={filter} />
       </Suspense>
     </div>
