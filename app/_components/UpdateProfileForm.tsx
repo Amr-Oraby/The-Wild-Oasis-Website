@@ -1,9 +1,7 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
 
 function UpdateProfileForm({ children }: { children: React.ReactNode }) {
-  const [count, setCount] = useState();
   // CHANGE
   const countryFlag = "/pt.jpg";
 
