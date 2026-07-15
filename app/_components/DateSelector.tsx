@@ -36,23 +36,22 @@ function DateSelector({
   const { minBookingLength, maxBookingLength } = settings;
 
   return (
-    <div className="flex flex-col justify-between">
+    <div className="flex flex-col justify-between gap-3">
       <DayPicker
         className="pt-12 place-self-center"
         mode="range"
-        // onSelect={setRange}
         selected={range}
+        // onSelect={setRange}
         min={minBookingLength + 1}
         max={maxBookingLength}
-        // fromMonth={new Date()}
-        // fromDate={new Date()}
-        // toYear={new Date().getFullYear() + 5}
+        startMonth={new Date()}
+        endMonth={new Date(new Date().getFullYear() + 5, 11)}
         captionLayout="dropdown"
         numberOfMonths={2}
       />
 
-      <div className="flex items-center justify-between px-8 bg-accent-500 text-primary-800 h-[72px]">
-        <div className="flex items-baseline gap-6">
+      <div className="flex items-center justify-between px-3 sm:px-8 bg-accent-500 text-primary-800 h-[72px]">
+        <div className="flex   items-center gap-6">
           <p className="flex gap-2 items-baseline">
             {discount > 0 ? (
               <>
@@ -67,15 +66,19 @@ function DateSelector({
             <span className="">/night</span>
           </p>
           {numNights ? (
-            <>
+            <div className=" flex  items-center gap-2">
               <p className="bg-accent-600 px-3 py-2 text-2xl">
                 <span>&times;</span> <span>{numNights}</span>
               </p>
-              <p>
-                <span className="text-lg font-bold uppercase">Total</span>{" "}
-                <span className="text-2xl font-semibold">${cabinPrice}</span>
+              <p className="flex gap-1">
+                <span className="text-sm sm:text-base font-bold uppercase">
+                  Total
+                </span>{" "}
+                <span className="text-sm sm:text-lg font-semibold">
+                  ${cabinPrice}
+                </span>
               </p>
-            </>
+            </div>
           ) : null}
         </div>
 

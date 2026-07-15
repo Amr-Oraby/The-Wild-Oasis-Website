@@ -35,4 +35,31 @@
         --rdp-background-color: theme("colors.accent.600");
         margin: 0;
     }
+
+
+}
+
+.rdp-months {
+    display: flex;
+    flex-wrap: nowrap !important;
+    gap: 0 !important
+}
+
+
+.rdp-month {
+    margin: 0;
+    padding: 15px;
+}
+
+@media (max-width:768px) {
+    .rdp-months {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+    }
+
+    .rdp-month {
+        width: fit-content;
+        padding: 5px;
+        font-size: 15px;
+    }
 }

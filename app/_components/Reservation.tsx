@@ -9,7 +9,7 @@ async function Reservation({ cabin }: { cabin: cabinType }) {
     getSettings(),
   ]);
   return (
-    <div className="mt-10 grid gap-3 grid-cols-1 md:grid-cols-2 border border-primary-800 min-h-[400px]">
+    <div className="mt-10 flex-col lg:flex-row flex border border-primary-800 min-h-[400px]">
       <DateSelector
         cabin={cabin}
         settings={settings}
