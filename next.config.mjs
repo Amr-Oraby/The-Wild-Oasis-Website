@@ -6,6 +6,10 @@ const nextConfig = {
                 protocol: "https",
                 hostname: "xhhsyxjyeauffkgiwcbf.supabase.co",
             },
+            {
+                protocol: "https",
+                hostname: "lh3.googleusercontent.com",
+            },
         ],
     },
     // output: "export" // no server
