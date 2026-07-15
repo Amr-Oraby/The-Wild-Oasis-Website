@@ -29,12 +29,6 @@
         animation: rotate 1s linear infinite;
     }
 
-    .rdp {
-        --rdp-cell-size: 32px;
-        --rdp-accent-color: theme("colors.accent.500");
-        --rdp-background-color: theme("colors.accent.600");
-        margin: 0;
-    }
 
 
 }
@@ -62,4 +56,28 @@
         padding: 5px;
         font-size: 15px;
     }
+}
+
+.rdp-root {
+    font-size: 15px;
+    --rdp-accent-color: theme("colors.accent.500") !important;
+    --rdp-accent-background-color: theme("colors.accent.100") !important;
+
+    --rdp-range_start-date-background-color: theme("colors.accent.600") !important;
+    --rdp-range_end-date-background-color: theme("colors.accent.600") !important;
+
+    --rdp-range_middle-background-color: theme("colors.accent.200") !important;
+    --rdp-range_middle-color: theme("colors.accent.900") !important;
+
+    --rdp-today-color: theme("colors.accent.500") !important;
+
+    --rdp-day-width: 36px;
+    --rdp-day-height: 36px;
+
+    --rdp-day_button-width: 34px;
+    --rdp-day_button-height: 34px;
+}
+
+.rdp-day_button {
+    font-size: 15px;
 }
