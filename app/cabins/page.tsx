@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import Spinner from "../_components/Spinner";
 import Filter from "../_components/Filter";
+import ReservationReminder from "../_components/ReservationReminer";
 
 // revalidate = 0 => dynamic page
 // revalidate > 0 => static and refetches
@@ -39,6 +40,7 @@ export default async function Page({ searchParams }: PageProps) {
       {/* whenever the key changes the spinner will show */}
       <Suspense fallback={<Spinner />} key={filter}>
         <CabinList filter={filter} />
+        <ReservationReminder />
       </Suspense>
     </div>
   );
