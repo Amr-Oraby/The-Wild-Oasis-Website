@@ -11,12 +11,17 @@ const authConfig = {
   callbacks: {
     // run this code whenever the user clicks account route
     authorized({ auth }) {
-      return !!auth?.user;
+      return !!auth?.user; // if false not authorized return to login page
     },
+  },
+  pages: {
+    signIn: "/login", // use this page to login not the default google btn
   },
 } satisfies NextAuthConfig;
 
 export const {
-  auth,
+  auth, // returns session
+  signIn,
+  signOut,
   handlers: { GET, POST },
 } = NextAuth(authConfig);
