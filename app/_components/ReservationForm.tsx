@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { cabinType } from "../types/cabinType";
+import { useReservation } from "./ReservationContext";
 
 // import { useReservation } from "./ReservationContext";
 type userType = {
@@ -16,7 +17,7 @@ function ReservationForm({
   cabin: cabinType;
   user: userType;
 }) {
-  //   const { range } = useReservation();
+  const { range } = useReservation();
   const { maxCapacity } = cabin;
 
   return (
@@ -38,7 +39,11 @@ function ReservationForm({
         </div>
       </div>
 
-      <p>{/* {String(range.from)} to {String(range.to)} */}</p>
+      {range?.from && range?.to && (
+        <p>
+          {String(range?.from)} to {String(range?.to)}
+        </p>
+      )}
 
       <form className="bg-primary-900 py-10 pt-14 px-10 text-lg flex gap-10 flex-col h-full">
         <div className="space-y-2">
