@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthConfig } from "next-auth";
 import Google from "next-auth/providers/google";
 
 const authConfig = {
@@ -10,11 +10,11 @@ const authConfig = {
   ],
   callbacks: {
     // run this code whenever the user clicks account route
-    authorized({ auth, request }) {
+    authorized({ auth }) {
       return !!auth?.user;
     },
   },
-};
+} satisfies NextAuthConfig;
 
 export const {
   auth,
