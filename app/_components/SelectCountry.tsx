@@ -16,7 +16,7 @@ async function SelectCountry({
   className,
 }: SelectCountryProps) {
   const countries = await getCountries();
-
+  console.log(defaultCountry);
   const flag =
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     countries?.find((country: any) => country.names.common === defaultCountry)
@@ -26,6 +26,7 @@ async function SelectCountry({
     <select
       name={name}
       id={id}
+      key={`${defaultCountry}%${flag}`}
       // Here we use a trick to encode BOTH the country name and the flag into the value. Then we split them up again later in the server action
       defaultValue={`${defaultCountry}%${flag}`}
       className={className}

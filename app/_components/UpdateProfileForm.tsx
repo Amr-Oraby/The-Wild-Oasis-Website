@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { guestType } from "../types/guestType";
 import { updateProfile } from "../_lib/actions";
+import { useFormStatus } from "react-dom";
 
 export function UpdateProfileForm({
   children,
@@ -13,6 +14,8 @@ export function UpdateProfileForm({
   // CHANGE
   if (!guest) return null;
   const { countryFlag, email, fullName, nationalID } = guest;
+  const inputStyle =
+    "px-1 py-0 sm:px-5 sm:py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400";
 
   return (
     <form
@@ -25,7 +28,7 @@ export function UpdateProfileForm({
           defaultValue={fullName}
           disabled
           name="fullName"
-          className="px-1 py-0 sm:px-5 sm:py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
+          className={inputStyle}
         />
       </div>
 
@@ -35,10 +38,9 @@ export function UpdateProfileForm({
           defaultValue={email}
           name="email"
           disabled
-          className="px-1 py-0 sm:px-5 sm:py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
+          className={inputStyle}
         />
       </div>
-
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <label htmlFor="nationality" className="text-sm sm:text-base">
@@ -59,22 +61,41 @@ export function UpdateProfileForm({
         {children}
       </div>
 
+      <ProfileFormFields nationalID={nationalID} inputStyle={inputStyle} />
+    </form>
+  );
+}
+
+export function ProfileFormFields({
+  nationalID,
+  inputStyle,
+}: {
+  nationalID: string | undefined;
+  inputStyle: string;
+}) {
+  const { pending } = useFormStatus(); // can only be used inside a component inside the form
+  return (
+    <>
       <div className="space-y-2">
         <label htmlFor="nationalID" className="text-sm sm:text-base">
           National ID number
         </label>
         <input
           defaultValue={nationalID}
+          disabled={pending}
           name="nationalID"
-          className="px-1 py-0 sm:px-5 sm:py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
+          className={inputStyle}
         />
       </div>
 
       <div className="flex justify-end items-center gap-6">
-        <button className="text-xs sm:text-base bg-accent-500 px-2 py-1 sm:px-8 sm:py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
-          Update profile
+        <button
+          disabled={pending}
+          className="text-xs sm:text-base bg-accent-500 px-2 py-1 sm:px-8 sm:py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300"
+        >
+          {pending ? "Updating..." : "Update profile"}
         </button>
       </div>
-    </form>
+    </>
   );
 }
