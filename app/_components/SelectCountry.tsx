@@ -20,7 +20,7 @@ async function SelectCountry({
   const flag =
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     countries?.find((country: any) => country.names.common === defaultCountry)
-      ?.flag.emoji ?? "";
+      ?.flag.url_svg ?? "";
 
   return (
     <select
@@ -37,7 +37,7 @@ async function SelectCountry({
       {countries.map((c: any) => (
         <option
           key={c.names.common}
-          value={`${c.names.common}%${c.flag.emoji}`}
+          value={`${c.names.common}%${c.flag.url_svg}`}
         >
           {c.names.common}
         </option>
