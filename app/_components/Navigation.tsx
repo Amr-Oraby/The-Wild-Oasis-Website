@@ -4,7 +4,6 @@ import Image from "next/image";
 
 export default async function Navigation() {
   const session = await auth(); // made the route dynamic as this is cookies
-  console.log(session);
   const linkStyle =
     "hover:text-accent-400 transition-colors text-base sm:text-lg flex gap-2 items-center";
   return (
