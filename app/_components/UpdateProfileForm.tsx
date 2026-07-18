@@ -1,16 +1,30 @@
 "use client";
 import Image from "next/image";
+import { guestType } from "../types/guestType";
+import { updateProfile } from "../_lib/actions";
 
-function UpdateProfileForm({ children }: { children: React.ReactNode }) {
+export function UpdateProfileForm({
+  children,
+  guest,
+}: {
+  children: React.ReactNode;
+  guest: guestType;
+}) {
   // CHANGE
-  const countryFlag = "/pt.jpg";
+  if (!guest) return null;
+  const { countryFlag, email, fullName, nationalID } = guest;
 
   return (
-    <form className="bg-primary-900 py-3 px-4 sm:py-8 sm:px-12 text-lg flex gap-6 flex-col">
+    <form
+      action={updateProfile}
+      className="bg-primary-900 py-3 px-4 sm:py-8 sm:px-12 text-lg flex gap-6 flex-col"
+    >
       <div className="space-y-2">
         <label className="text-sm sm:text-base">Full name</label>
         <input
+          defaultValue={fullName}
           disabled
+          name="fullName"
           className="px-1 py-0 sm:px-5 sm:py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
         />
       </div>
@@ -18,6 +32,8 @@ function UpdateProfileForm({ children }: { children: React.ReactNode }) {
       <div className="space-y-2">
         <label className="text-sm sm:text-base">Email address</label>
         <input
+          defaultValue={email}
+          name="email"
           disabled
           className="px-1 py-0 sm:px-5 sm:py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
         />
@@ -28,13 +44,15 @@ function UpdateProfileForm({ children }: { children: React.ReactNode }) {
           <label htmlFor="nationality" className="text-sm sm:text-base">
             Where are you from?
           </label>
-          <Image
-            src={countryFlag}
-            width={30}
-            height={30}
-            alt="Country flag"
-            className="h-5 rounded-sm"
-          />
+          {countryFlag && (
+            <Image
+              src={countryFlag}
+              width={30}
+              height={30}
+              alt="Country flag"
+              className="h-5 rounded-sm"
+            />
+          )}
         </div>
 
         {/* // server component  */}
@@ -46,6 +64,7 @@ function UpdateProfileForm({ children }: { children: React.ReactNode }) {
           National ID number
         </label>
         <input
+          defaultValue={nationalID}
           name="nationalID"
           className="px-1 py-0 sm:px-5 sm:py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
         />
@@ -59,5 +78,3 @@ function UpdateProfileForm({ children }: { children: React.ReactNode }) {
     </form>
   );
 }
-
-export default UpdateProfileForm;

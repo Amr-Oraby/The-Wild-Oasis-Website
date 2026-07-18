@@ -11,8 +11,11 @@ const nextConfig = {
                 hostname: "lh3.googleusercontent.com",
             },
         ],
+
+        qualities: [75, 80, 100],
     },
-    // output: "export" // no server
+
+    // output: "export",
 };
 
 export default nextConfig;
