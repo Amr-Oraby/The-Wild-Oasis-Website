@@ -26,7 +26,7 @@ function DateSelector({
   bookedDates: Date[];
   cabin: cabinType;
 }) {
-  console.log(cabin);
+  // console.log(cabin);
   const { range, setRange } = useReservation();
   const numNights = 3;
   const { regularPrice: cabinPrice, discount, regularPrice } = cabin;

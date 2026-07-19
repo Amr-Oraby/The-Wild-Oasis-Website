@@ -16,7 +16,7 @@ async function SelectCountry({
   className,
 }: SelectCountryProps) {
   const countries = await getCountries();
-  console.log(defaultCountry);
+  // console.log(defaultCountry);
   const flag =
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     countries?.find((country: any) => country.names.common === defaultCountry)
