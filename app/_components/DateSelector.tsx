@@ -19,7 +19,7 @@ import { useReservation } from "./ReservationContext";
 
 function DateSelector({
   settings,
-  bookedDates,
+  // bookedDates,
   cabin,
 }: {
   settings: settingsType;
