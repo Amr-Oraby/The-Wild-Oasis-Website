@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "./auth";
-import { updateGuest } from "./data-service";
+import { deleteBooking, getBookings, updateGuest } from "./data-service";
 
 export async function signInAction() {
   await signIn("google", { redirectTo: "/account" });
@@ -34,4 +34,19 @@ export async function updateProfile(formData: FormData) {
 
   // revalidating  the casch
   revalidatePath("/account/profile");
+}
+
+export async function deleteReservation(bookingId: number) {
+  const session = await auth();
+  if (!session) throw new Error("You must be logged in first");
+
+  // security
+  if (!session?.user?.id) throw new Error("You must be logged in first");
+  const guestBookings = await getBookings(Number(session?.user?.id));
+  const guestBookingsIds = guestBookings.map((booking) => booking.id);
+  if (!guestBookingsIds.includes(bookingId))
+    throw new Error("You are not allowed to delete this booking");
+
+  deleteBooking(bookingId);
+  revalidatePath("/account/reservations");
 }
