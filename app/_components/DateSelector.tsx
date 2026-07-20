@@ -1,35 +1,46 @@
 "use client";
 
-// import { isWithinInterval } from "date-fns";
-import { DayPicker } from "react-day-picker";
+import { isWithinInterval } from "date-fns";
+import { DateRange, DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { settingsType } from "../types/settingsType";
 import { cabinType } from "../types/cabinType";
 import { useReservation } from "./ReservationContext";
+import { differenceInDays, isPast, isSameDay } from "date-fns";
 
-// function isAlreadyBooked(range, datesArr) {
-//   return (
-//     range.from &&
-//     range.to &&
-//     datesArr.some((date) =>
-//       isWithinInterval(date, { start: range.from, end: range.to }),
-//     )
-//   );
-// }
+function isAlreadyBooked(range: DateRange | undefined, datesArr: Date[]) {
+  const { from, to } = range ?? {};
+
+  if (!from || !to) return false;
+
+  return datesArr.some((date) =>
+    isWithinInterval(date, {
+      start: from,
+      end: to,
+    }),
+  );
+}
 
 function DateSelector({
   settings,
-  // bookedDates,
+  bookedDates,
   cabin,
 }: {
   settings: settingsType;
   bookedDates: Date[];
   cabin: cabinType;
 }) {
-  // console.log(cabin);
   const { range, setRange } = useReservation();
-  const numNights = 3;
-  const { regularPrice: cabinPrice, discount, regularPrice } = cabin;
+  const displayRange = isAlreadyBooked(range, bookedDates)
+    ? { from: undefined, to: undefined }
+    : range;
+  const { discount, regularPrice } = cabin;
+  const numNights =
+    displayRange?.from && displayRange?.to
+      ? differenceInDays(displayRange.to, displayRange.from)
+      : 0;
+  const cabinPrice = numNights * (regularPrice - discount);
+
   // SETTINGS
   const { minBookingLength, maxBookingLength } = settings;
 
@@ -38,7 +49,7 @@ function DateSelector({
       <DayPicker
         className="pt-12 place-self-center"
         mode="range"
-        selected={range}
+        selected={displayRange}
         onSelect={setRange}
         min={minBookingLength + 1}
         max={maxBookingLength}
@@ -46,6 +57,10 @@ function DateSelector({
         endMonth={new Date(new Date().getFullYear() + 5, 11)}
         captionLayout="dropdown"
         numberOfMonths={2}
+        disabled={(curDate) =>
+          isPast(curDate) ||
+          bookedDates.some((date) => isSameDay(date, curDate))
+        }
       />
 
       <div className="flex gap-1 items-center justify-between px-3 sm:px-8 bg-accent-500 text-primary-800 h-[72px]">
@@ -82,7 +97,7 @@ function DateSelector({
           ) : null}
         </div>
 
-        {range?.from || range?.to ? (
+        {displayRange?.from || displayRange?.to ? (
           <button
             className=" border border-primary-800 py-2 px-4 text-sm font-semibold"
             onClick={() => setRange(undefined)}
