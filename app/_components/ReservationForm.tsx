@@ -29,8 +29,8 @@ function ReservationForm({
   const cabinPrice = numNights * (regularPrice - discount);
 
   const bookingData = {
-    startDate: startDate?.toISOString(),
-    endDate: endDate?.toISOString(),
+    startDate: startDate!.toISOString(),
+    endDate: endDate!.toISOString(),
     numNights,
     cabinPrice,
     cabinId,

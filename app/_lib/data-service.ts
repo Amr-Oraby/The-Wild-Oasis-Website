@@ -2,7 +2,7 @@ import { eachDayOfInterval } from "date-fns";
 import { supabase } from "./supbase";
 import { notFound } from "next/navigation";
 import { guestType } from "../types/guestType";
-import { bookingType } from "../types/bookingType";
+import { CreateBookingType } from "../types/bookingType";
 /////////////
 // GET
 
@@ -173,7 +173,7 @@ export async function createGuest(newGuest: guestType) {
   return data;
 }
 
-export async function createBooking(newBooking: bookingType) {
+export async function createBooking(newBooking: CreateBookingType) {
   const { data, error } = await supabase
     .from("bookings")
     .insert([newBooking])

@@ -59,8 +59,8 @@ export async function deleteReservation(bookingId: number) {
 }
 
 type BookingData = {
-  startDate?: string;
-  endDate?: string;
+  startDate: string;
+  endDate: string;
   numNights: number;
   cabinPrice: number;
   cabinId: number;
@@ -88,7 +88,6 @@ export async function createReservation(
     status: "unconfirmed",
   };
   await createBooking(newBooking);
-  // revalidatePath(`/cabins`);
   revalidatePath(`/cabins/${bookingData?.cabinId}`);
   redirect("/thankyou");
 }
