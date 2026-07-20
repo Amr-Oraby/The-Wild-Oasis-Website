@@ -1,12 +1,12 @@
 export type bookingType = {
-  id: number;
-  created_at: string;
-  startDate: string;
-  endDate: string;
+  id?: number;
+  created_at?: string;
+  startDate?: string;
+  endDate?: string;
   numNights: number;
   numGuests: number;
   totalPrice: number;
-  guestId: number;
+  guestId?: number;
   cabinId: number;
 
   cabinPrice?: number;

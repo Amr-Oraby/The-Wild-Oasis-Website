@@ -58,15 +58,39 @@ export async function deleteReservation(bookingId: number) {
   revalidatePath("/account/reservations");
 }
 
-export async function createReservation(formData: FormData) {
+type BookingData = {
+  startDate?: string;
+  endDate?: string;
+  numNights: number;
+  cabinPrice: number;
+  cabinId: number;
+};
+
+export async function createReservation(
+  bookingData: BookingData,
+  formData: FormData,
+) {
   const session = await auth();
   if (!session) throw new Error("You must be logged in first");
 
-  const newBooking = {};
+  const newBooking = {
+    ...bookingData,
+    guestId: Number(session?.user?.id),
+    numGuests: Number(formData.get("numGuests")),
+    observations: (formData.get("observations") as string | null)?.slice(
+      0,
+      1000,
+    ),
+    extrasPrice: 0,
+    totalPrice: bookingData.cabinPrice,
+    isPaid: false,
+    hasBreakfast: false,
+    status: "unconfirmed",
+  };
   await createBooking(newBooking);
-  revalidatePath(`/cabins`);
-  revalidatePath(`/cabins/${cabinId}`);
-  redirect("/account/reservations");
+  // revalidatePath(`/cabins`);
+  revalidatePath(`/cabins/${bookingData?.cabinId}`);
+  redirect("/thankyou");
 }
 
 export async function editReservation(formData: FormData) {
