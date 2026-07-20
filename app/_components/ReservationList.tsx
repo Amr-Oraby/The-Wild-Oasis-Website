@@ -1,13 +1,13 @@
 "use client";
 import { useOptimistic } from "react";
-import { bookingType } from "../types/bookingType";
+import { ReservationCardType } from "../types/bookingType";
 import ReservationCard from "./ReservationCard";
 import { deleteReservation } from "../_lib/actions";
 
-function ReservationList({ bookings }: { bookings: bookingType[] }) {
+function ReservationList({ bookings }: { bookings: ReservationCardType[] }) {
   const [optBookings, optDelete] = useOptimistic(
     bookings,
-    (currBookings: bookingType[], bookingId: number) => {
+    (currBookings: ReservationCardType[], bookingId: number) => {
       return currBookings.filter((booking) => booking.id != bookingId);
     },
   );
@@ -18,7 +18,7 @@ function ReservationList({ bookings }: { bookings: bookingType[] }) {
   }
   return (
     <ul className="space-y-6">
-      {optBookings.map((booking: bookingType) => (
+      {optBookings.map((booking: ReservationCardType) => (
         <ReservationCard
           onDelete={handleDelete}
           booking={booking}
